@@ -68,8 +68,23 @@ for (i in 1:length(slopes)) {
   }
 }
 
+#AGAIN: reiterate closer to #s from first run
+slopes2 <- seq(from = 0.7, to = 0.75, length.out = 10)
+intercepts2 <- seq(from = 4, to = 5, length.out = 10)
+grid2 <- matrix(data = NA, nrow = 10, ncol = 10)
+
+for (i in 1:length(slopes2)) {
+  for (j in 1:length(intercepts2)) {
+    
+    output = sumsq(y_obs = y_obs, x = x, b0 = intercepts2[j], b1 = slopes2[i])
+    
+    grid2[j,i] = output
+  }
+}
 
 #Paste your estimated model coefficients below.
+#Observed intercept = 4.22, slope = 0.7
+
 
 ##### Q4  #####
 #Analyze the data generated in Q1 using a grid search to minimize the negative log likelihood (no need to iterate more than twice).  Note, there is a third parameter that you will need to estimate here: sigma
