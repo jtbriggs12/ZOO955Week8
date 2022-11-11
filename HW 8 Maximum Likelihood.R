@@ -5,14 +5,25 @@
 ########  Q1  #####
 #Simulate some data for a linear regression using the simple linear regression model. Make sigma large enough that it resembles “typical” ecological data when you plot it, but not so large that it completely obscures the relationship between x and y.
 #Record your true beta_0, beta_1, and sigma here:
+beta_0 <- 4
+beta_1 <- 0.75
+sigma <- 4
 
+# Simulate data from set parameters with error
+x <- 1:50
+y_obs <- beta_0 + beta_1*x + rnorm(length(x), mean=0, sd=sigma)
+plot(y_obs ~ x)
 
 #Fit a linear regression model using lm() and do your typical checks of model assumptions that we went over in class.
-#Paste your estimated model coefficients and their 95% confidence intervals below:
+mod <- lm(y_obs ~ x)
 
+#Paste your estimated model coefficients and their 95% confidence intervals below:
+summary(mod)
+coef(mod)
+confint(mod, level = 0.95)
 
 #Are the coefficient estimates close to the true values?  Do the 95% confidence intervals cover the true values?
-
+#yes the estimates are close and the true values fall within the confidence intervals. 
 
 #Relevant functions: rnorm()
 
