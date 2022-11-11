@@ -31,16 +31,41 @@ confint(mod, level = 0.95)
 
 ######  Q2  ######
 #: Analyze the data generated in Q1 using the normal equation:Beta hat = (X^T X) ^-1 X^T y Paste your estimated model coefficients below.
+X <- cbind(rep(1, length(x)), x) 
 
-
-bhat = solve(t(X)%*%X) %*% (t(X)%*%y) #where y = matrix of possible values and X = 
+bhat <- solve(t(X)%*%X) %*% (t(X)%*%y_obs) 
 
 #Are the coefficient estimates close to the true values?  
+#Yes, they are the same the model in Q1
 
 #Relevant functions: solve(), t()
 
 #####   Q3     #####
 #Analyze the data generated in Q1 using a grid search to minimize the sum of squared errors (no need to iterate more than twice):
+#function going through y_obs, subtracting beta_0 + beta_1*x, squaring it, then sum all of them
+#For a bunch of things around 4 and 0.75 
+
+#Create possible range of slopes and intercepts to search through
+slopes <- seq(from = 0.5, to = 1, by = 0.05)
+intercepts <- seq(from = 0, to = 8, by = 1)
+#Make empty matrix to save values to
+grid1 <- matrix(data = NA, nrow = 11, ncol = 8)
+
+#Create function to calc sum of squares
+sumsq = function(y_obs, x, b0, b1) {
+  y_exp = b0 + b1*x
+  squares = ((y_obs - y_exp)^2)
+  sums = sum(squares)
+  return(sums)
+}
+
+counter=0
+for (i in length(slopes)) {
+  for (j in length(intercepts)) {
+    counter = counter + 1
+    grid1[counter, 1] = 
+  }
+}
 
 #Paste your estimated model coefficients below.
 
