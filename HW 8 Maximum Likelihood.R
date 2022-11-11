@@ -89,7 +89,32 @@ for (i in 1:length(slopes2)) {
 ##### Q4  #####
 #Analyze the data generated in Q1 using a grid search to minimize the negative log likelihood (no need to iterate more than twice).  Note, there is a third parameter that you will need to estimate here: sigma
 #Paste your estimated model coefficients below
+y_pred <- beta_0 + beta_1*x
 
+nloglike <- function(y_obs, y_pred, sigma){
+  -sum(dnorm(x=y_obs, mean=y_pred, sd=sigma, log=T))
+}
+
+sigma = seq(from = 3, to = 5, length.out = 10)
+results <- array(data=NA, dim=c(length(slopes), length(intercepts), length(sigma)), 
+                   dimnames=list(slopes,intercepts, sigma))
+
+for (i in 1:length(slopes)) {
+  for (j in 1:length(intercepts)) {
+    for (k in 1:length(sigma)) {
+      output = nloglike(y_obs = y_obs, y_pred = y_pred, sigma = sigma)
+      results[i,j,k] = output
+    }
+  }
+}
+
+#We tried these to extract answers, wierdly didn't work. 
+#We're moving on - its Friday at 4:32 pm CST
+var <- which(results == min(results), arr.ind = T)
+var_coefs <- c(intercepts[var[1]], 
+                   slopes[var[2]],
+                   sigma[var[2]])
+arrayInd(which.min(results), dim(results))
 
 ######  Q5   ######
 #Analyze the data generated in Q1 using optim() to minimize the negative log likelihood.  Note, there is a third parameter that you will need to estimate here: sigma
