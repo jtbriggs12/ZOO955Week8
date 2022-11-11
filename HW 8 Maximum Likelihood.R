@@ -46,10 +46,10 @@ bhat <- solve(t(X)%*%X) %*% (t(X)%*%y_obs)
 #For a bunch of things around 4 and 0.75 
 
 #Create possible range of slopes and intercepts to search through
-slopes <- seq(from = 0.5, to = 1, by = 0.05)
-intercepts <- seq(from = 0, to = 8, by = 1)
+slopes <- seq(from = 0.5, to = 1, length.out = 10)
+intercepts <- seq(from = 0, to = 8, length.out = 10)
 #Make empty matrix to save values to
-grid1 <- matrix(data = NA, nrow = 11, ncol = 8)
+grid1 <- matrix(data = NA, nrow = 10, ncol = 10)
 
 #Create function to calc sum of squares
 sumsq = function(y_obs, x, b0, b1) {
@@ -59,13 +59,15 @@ sumsq = function(y_obs, x, b0, b1) {
   return(sums)
 }
 
-counter=0
-for (i in length(slopes)) {
-  for (j in length(intercepts)) {
-    counter = counter + 1
-    grid1[counter, 1] = 
+for (i in 1:length(slopes)) {
+  for (j in 1:length(intercepts)) {
+    
+    output = sumsq(y_obs = y_obs, x = x, b0 = intercepts[j], b1 = slopes[i])
+    
+    grid1[j,i] = output
   }
 }
+
 
 #Paste your estimated model coefficients below.
 
