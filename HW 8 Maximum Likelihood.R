@@ -31,6 +31,10 @@ confint(mod, level = 0.95)
 
 ######  Q2  ######
 #: Analyze the data generated in Q1 using the normal equation:Beta hat = (X^T X) ^-1 X^T y Paste your estimated model coefficients below.
+
+
+bhat = solve(t(X)%*%X) %*% (t(X)%*%y) #where y = matrix of possible values and X = 
+
 #Are the coefficient estimates close to the true values?  
 
 #Relevant functions: solve(), t()
